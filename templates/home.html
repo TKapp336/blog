@@ -1,0 +1,12 @@
+<!-- templates/home.html -->
+{% extends "base.html" %} <!-- note this template extends base.html and then we wrap our desired code with content blocks-->
+
+{% block content %}
+{% for post in post_list %} <!-- we use the Django Templating Language to set up a simple for loop for each blog post; note 
+    that post_list comes from ListView and contains all the objects in our view of the model Post-->
+  <div class="post-entry"> 
+    <h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
+    <p>{{ post.body }}</p>
+  </div>
+{% endfor %}
+{% endblock content %}

@@ -1,0 +1,12 @@
+<!-- templates/post_detail.html -->
+<!-- we specify that this template inherits from base.html -->
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class="post-entry">
+  <!-- display the title and body from our context object, which Detail view makes accesible as "post" -->
+  <h2>{{ post.title }}</h2> 
+  <p>{{ post.body }}</p>
+</div>
+{% endblock content %}
