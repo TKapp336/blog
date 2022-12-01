@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Log In</h2>
+<!-- We're using HTML form tags and specifying the POST method since we're sending data to the server (we'd use GET -->
+<!-- if we were requesting data, such as in a search engine form). We add a {% csrf_token %} for security concerns, namely
+to prevent a CSRF Attack. The form's contents are outputted between the tags via the form.as_p and we add the submit 
+button below -->
+<form method="post">{% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Log In</button>
+</form>
+{% endblock content %}

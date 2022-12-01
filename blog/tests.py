@@ -51,3 +51,37 @@ class BlogTests():
         self.assertEqual(no_response.status_code,404)
         self.assertContains(response, "A good title")
         self.assertTemplateUsed(response, "post_detail.html")
+
+    # for test_post_createview, we create a new response to check that the page has a 302 redirect status code and the 
+    # last() object created on our model matches the new response.
+    def test_post_createview(self):
+        response = self.client.post(
+            reverse("post_new"),
+            {
+                "title": "New title",
+                "body": "New text",
+                "author": self.user.id,
+            },
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Post.objects.last().title, "New title")
+        self.assertEqual(Post.objects.last().body, "New text")
+
+    # for test_post_updateview, we see if we can update the initial post created in setUpTestData since the data is
+    # available througout our entire test class
+    def test_post_updateview(self):
+        response = self.client.post(
+            reverse("post_edit", args="1"),
+            {
+                "title": "Updated title",
+                "body": "Updated text",
+            },
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Post.objects.last().title, "Updated title")
+        self.assertEqual(Post.objects.last().body, "Updated text")
+
+    # this test confirms that a 302 redirect occurs when deleting a post
+    def test_post_deleteview(self):
+        response = self.client.post(reverse("post_delete", args="1"))
+        self.assertEqual(response.status_code, 302)

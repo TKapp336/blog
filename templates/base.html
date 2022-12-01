@@ -1,5 +1,6 @@
 <!-- templates/base.html -->
-<!-- note the code between "block content" and  "end content" can be filled by other templates-->
+<!-- note the code between "block content" and  "end content" can be filled by other templates -->
+<!-- in this template we also update our base template to display a link to a page for entering new blog posts -->
 {% load static %}
 <html>
   <head>
@@ -8,12 +9,27 @@
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
   </head>
   <body>
-    <header>
-      <h1><a href="{% url 'home' %}">Django blog</a></h1>
-    </header>
     <div>
+      <header>
+        <div class="nav-left">
+          <h1><a href="{% url 'home' %}">Django blog</a></h1>
+        </div>
+        <div class="nav-right">
+          <a href="{% url 'post_new' %}">+ New Blog Post</a>
+        </div>
+      </header>
+      <!-- display a message to users whether they are logged in or not. We can use the is_authenticated attribute for this -->
+      {% if user.is_authenticated %}
+        <p>Hi {{ user.username }}!</p>
+        <!-- link for user to click to logout -->
+        <p><a href="{% url 'logout' %}">Log out</a></p>
+      {% else %}
+        <p>You are not logged in.</p>
+        <a href="{% url 'login' %}">Log In</a> |
+        <a href="{% url 'signup' %}">Sign Up</a>
+      {% endif %}
       {% block content %}
       {% endblock content %}
     </div>
-</body>
+  </body>
 </html>

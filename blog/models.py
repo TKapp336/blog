@@ -25,4 +25,4 @@ class Post(models.Model):
     # this method tells Django how to calculate the canonical URL for our model object; it says to use the URL named
     # post_detail and pass in the pk. 
     def get_absolute_url(self):
-        return reverse("post detail",kwargs={"pk": self.pk})
+        return reverse("home")

@@ -9,4 +9,12 @@
   <h2>{{ post.title }}</h2> 
   <p>{{ post.body }}</p>
 </div>
+
+<!-- we've added a link using the anchor and url tags. Within that, we've specified the target name of our url, which
+will be called post_edit and passed the parameter needed to specify which post, the post's primary key -->
+<p><a href="{% url 'post_edit' post.pk %}">+ Edit Blog Post</a></p>
+
+<!-- we've added a link using the anchor and url tags. Within that, we've specified the target name of our url, which
+will be called post_delete and passed the parameter needed to specify which post, the post's primary key -->
+<p><a href="{% url 'post_delete' post.pk %}">+ Delete Blog Post</a></p>
 {% endblock content %}

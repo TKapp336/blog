@@ -1,0 +1,14 @@
+<!-- templates/post_new.html -->
+<!-- on the top line we inherit from our base.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>New post</h1>
+<!-- we use the form tags with the POST method since we're sending data and add a csrf_token to prevent request forgery -->
+<form action="" method="post">{% csrf_token %}
+  <!-- then, to output our form data we use the form.as_p which renders the specified fields within paragraph p tags -->
+  {{ form.as_p }}
+  <!-- finally, specify an input type of submit and assign it a value: save -->
+  <input type="submit" value="Save">
+</form>
+{% endblock content %}

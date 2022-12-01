@@ -1,0 +1,13 @@
+<!-- templates/post_edit.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Edit post</h1>
+<!-- We again use the form tags, Django's csrf_token for security, form.as_p to display our form fields with paragraph tags
+, and finally give it the value "Update" on the submit button. -->
+<form action="" method="post">{% csrf_token %}
+  {{ form.as_p }}
+<!-- Upon submission, we give it the update value -->
+<input type="submit" value="Update">
+</form>
+{% endblock content %}
